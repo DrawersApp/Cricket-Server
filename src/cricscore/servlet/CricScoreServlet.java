@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -35,6 +36,9 @@ public class CricScoreServlet extends HttpServlet {
 		
 		String responseString = null;
 		String paramId = (String) request.getParameter("id");
+        if (paramId != null) {
+            paramId = URLDecoder.decode(paramId);
+        }
 		logger.info("ID = " + paramId);
 		if (paramId == null) {
 			List<Match> matches = cricScoreService.getMatches();
